@@ -26,18 +26,18 @@
     }
 
     .booklet {
-      width: 350px;
-      height: 480px;
+      width: 300px; /* Smaller width */
+      height: 420px; /* Smaller height */
       position: relative;
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
       transition: width 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
       display: flex;
       perspective: 1500px;
     }
 
-    .booklet.open { width: 700px; }
+    .booklet.open { width: 600px; } /* Scaled open width */
 
     .page-half {
       flex: 1;
@@ -46,11 +46,11 @@
       display: flex;
       flex-direction: column;
       align-items: center; 
-      padding: 30px;
+      padding: 20px; /* Reduced padding */
       box-sizing: border-box;
       background: #fff;
       overflow: hidden;
-      border-radius: 0 15px 15px 0;
+      border-radius: 0 12px 12px 0;
     }
 
     .cover-overlay {
@@ -70,9 +70,9 @@
       cursor: pointer;
       transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.4s ease 0.4s;
       transform-origin: left;
-      border-radius: 15px;
+      border-radius: 12px;
       backface-visibility: hidden;
-      border: 10px solid rgba(255, 255, 255, 0.1);
+      border: 8px solid rgba(255, 255, 255, 0.1);
     }
 
     .booklet.open .cover-overlay { transform: rotateY(-180deg); opacity: 0; pointer-events: none; }
@@ -91,28 +91,29 @@
 
     .booklet.open #rightPageContent { opacity: 1; pointer-events: auto; }
 
-    h1 { font-size: 24px; color: #ff4d6d; text-align: center; }
-    img { width: 150px; border-radius: 15px; margin: 10px 0; }
+    h1 { font-size: 18px; color: #ff4d6d; text-align: center; margin: 10px 0; }
+    h2 { font-size: 16px; color: #ff4d6d; margin-top: 25px; }
+    p { font-size: 13px; color: #555; text-align: center; line-height: 1.4; }
+    img { width: 120px; border-radius: 10px; margin: 5px 0; }
     .hidden { display: none !important; }
 
     button {
-      padding: 10px 20px;
-      font-size: 16px;
+      padding: 8px 16px;
+      font-size: 14px;
       border: none;
-      border-radius: 50px;
+      border-radius: 40px;
       cursor: pointer;
       font-weight: bold;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       transition: transform 0.2s;
     }
 
-    /* FIXED: Pushing buttons further to the corners */
     #yesBtn { 
       background: #ff4d6d; 
       color: white; 
       position: absolute; 
-      bottom: 25px; 
-      left: 15px; /* Scooted further left */
+      bottom: 20px; 
+      left: 15px; 
       z-index: 200; 
     }
     
@@ -120,22 +121,23 @@
       background: #fdfdfd; 
       color: #999; 
       position: absolute; 
-      bottom: 25px; 
-      right: 15px; /* Scooted further right */
+      bottom: 20px; 
+      right: 15px; 
       z-index: 200; 
       transition: all 0.15s ease; 
     }
 
     #replyBox {
-      width: 90%;
-      padding: 10px;
-      border: 2px solid #ffd6e8;
-      border-radius: 10px;
-      margin-top: 10px;
+      width: 95%;
+      padding: 8px;
+      font-size: 12px;
+      border: 1.5px solid #ffd6e8;
+      border-radius: 8px;
+      margin-top: 8px;
       resize: none;
     }
 
-    .send-reply-btn { background: #ff4d6d; color: white; margin-top: 10px; }
+    .send-reply-btn { background: #ff4d6d; color: white; margin-top: 8px; font-size: 12px; }
   </style>
 </head>
 <body>
@@ -143,13 +145,13 @@
   <div class="booklet" id="booklet">
     <div class="cover-overlay" onclick="openBook()">
       <h1>For You</h1>
-      <div style="font-size: 60px; margin: 20px 0;">💌</div>
+      <div style="font-size: 45px; margin: 15px 0;">💌</div>
       <p>Tap to reveal my secret...</p>
     </div>
 
-    <div class="page-half" style="border-right: 1px solid #f0f0f0; border-radius: 15px 0 0 15px;">
-      <h2 style="color: #ff4d6d; margin-top: 40px;">Dear Crush,</h2>
-      <p style="color: #555; text-align: center; font-style: italic; line-height: 1.6;">
+    <div class="page-half" style="border-right: 1px solid #f0f0f0; border-radius: 12px 0 0 12px;">
+      <h2>Dear Crush,</h2>
+      <p>
         "I've been wanting to ask you this for a while now..."
       </p>
       <img src="https://gifdb.com/images/high/beating-heart-cute-bunny-hug-3n93ptp7obb6tatv.gif" alt="bunny">
@@ -166,7 +168,7 @@
 
         <div id="successSection" class="hidden" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
           <h1>Yey! I'm so happy! 💘</h1>
-          <p style="color: #555; font-size: 14px;">Do you have a message for me?</p>
+          <p>Do you have a message for me?</p>
           <textarea id="replyBox" rows="3" placeholder="Type your reply here..."></textarea>
           <button class="send-reply-btn" id="sendReply" onclick="sendReply()">Send Message ✨</button>
         </div>
@@ -183,7 +185,7 @@
     function openBook() { booklet.classList.add('open'); }
 
     function showSuccess() {
-      confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
       document.getElementById('questionSection').classList.add('hidden');
       document.getElementById('successSection').classList.remove('hidden');
       fetch(webhookURL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: "🚨 **SHE SAID YES!**" }) });
@@ -197,17 +199,16 @@
     }
 
     function moveNo() {
-      const padding = 20;
+      const padding = 15;
       const maxX = rightPage.clientWidth - noBtn.offsetWidth - padding; 
       const maxY = rightPage.clientHeight - noBtn.offsetHeight - padding;
       
       let randomX, randomY;
       
-      // Ensure the "No" button doesn't jump directly onto the "Yes" button
       do {
         randomX = Math.floor(Math.random() * maxX);
         randomY = Math.floor(Math.random() * maxY);
-      } while (randomX < 100 && randomY > (rightPage.clientHeight - 100));
+      } while (randomX < 80 && randomY > (rightPage.clientHeight - 80));
 
       noBtn.style.right = "auto"; 
       noBtn.style.bottom = "auto";
